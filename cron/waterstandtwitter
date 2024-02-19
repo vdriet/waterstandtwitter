@@ -1,1 +1,1 @@
-* */8 * * * peter [ -x /home/peter/dev/waterstandtwitter/run.sh ] && /home/peter/dev/waterstandtwitter/run.sh >> /home/peter/logs/cron_waterstandtwitter.log 2>&1
+0 */8 * * * peter [ -x /home/peter/dev/waterstandtwitter/run.sh ] && /home/peter/dev/waterstandtwitter/run.sh >> /home/peter/logs/cron_waterstandtwitter.log 2>&1
