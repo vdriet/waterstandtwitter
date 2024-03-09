@@ -1,4 +1,3 @@
-cd /home/peter/dev/waterstandtwitter
 docker stop waterstandtwitter
 docker rm -f waterstandtwitter
 docker run \
