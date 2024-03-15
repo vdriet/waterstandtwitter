@@ -1,8 +1,7 @@
-""" Ophalen van de waterstand bij Zwolle en posten op slack """
+""" Ophalen van de waterstand """
 import json
 from urllib.request import urlopen, Request
-from datetime import datetime
-from datetime import timedelta
+from datetime import datetime, timedelta
 
 BASEURL = 'https://waterinfo.rws.nl/api/chart/get' + \
           '?mapType=waterhoogte&locationCode={}({})&values=-48,48'
