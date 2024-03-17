@@ -9,9 +9,9 @@ lijst = {
 	'ZUTP': {'naam': 'Zutphen-Noord', 'water': 'IJssel', 'twitter': 'ZUTP'},
 	}
 
-def twitter_waterstand(key, weergave_tijd, hoogtenu, hoogtemorgen):
+def twitterwaterstand(key, weergavetijd, hoogtenu, hoogtemorgen):
   """ versturen van de waterstand naar Twitter """
-  datum, tijd = weergave_tijd.split()
+  datum, tijd = weergavetijd.split()
   gegevens = lijst.get(key, {})
   if gegevens == {}:
     print(f'Geen gegevens gevonden voor {key}')
@@ -35,9 +35,9 @@ def twitter_waterstand(key, weergave_tijd, hoogtenu, hoogtemorgen):
     else:
       hoogtemorgen = hoogtemorgen * -1
       bericht = bericht + f', verwachting voor morgen is {hoogtemorgen} cm onder NAP'
-    tweet_bericht(gegevens.get('twitter'), bericht)
+    tweetbericht(gegevens.get('twitter'), bericht)
 
-def tweet_bericht(key, tekst):
+def tweetbericht(key, tekst):
   """ Tweeten van 1 bericht """
   envappkey = os.environ.get(f'TWITTER_{key}_APP_KEY')
   envappsecret = os.environ.get(f'TWITTER_{key}_APP_SECRET')
@@ -58,7 +58,7 @@ def main():
     weergavetijd = gegevens['tijd']
     hoogtenu = gegevens['nu']
     hoogtemorgen = gegevens['morgen']
-    twitter_waterstand(key, weergave_tijd, hoogtenu, hoogtemorgen)
+    twitterwaterstand(key, weergavetijd, hoogtenu, hoogtemorgen)
 
 if __name__ == "__main__":
   main()
