@@ -54,7 +54,10 @@ def tweet_bericht(key, tekst):
 def main():
   """ hoofdroutine """
   for key, gegevens in lijst.items():
-    weergave_tijd, hoogtenu, hoogtemorgen = haalwaterstand(gegevens.get('naam'), key)
+    gegevens = haalwaterstand(gegevens.get('naam'), key)
+    weergavetijd = gegevens['tijd']
+    hoogtenu = gegevens['nu']
+    hoogtemorgen = gegevens['morgen']
     twitter_waterstand(key, weergave_tijd, hoogtenu, hoogtemorgen)
 
 if __name__ == "__main__":
