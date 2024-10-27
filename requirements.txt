@@ -2,7 +2,7 @@ certifi==2024.8.30
 charset-normalizer==3.4.0
 idna==3.10
 oauthlib==3.2.2
-pip==24.3
+pip==24.3.1
 requests==2.32.3
 requests-oauthlib==1.4.1
 setuptools==75.2.0
