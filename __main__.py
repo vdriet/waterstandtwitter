@@ -36,7 +36,7 @@ def twitterwaterstand(key, weergavetijd, hoogtenu, hoogtemorgen):
       hoogtemorgen = hoogtemorgen * -1
       bericht = bericht + f', verwachting voor morgen is {hoogtemorgen} cm onder NAP'
     tweetbericht(gegevens.get('twitter'), bericht)
-    print(f'Succesvol tweet geplaats voor {key}')
+    print(f'Succesvol tweet geplaatst voor {key} met gegevens van {datum} {tijd}')
 
 def tweetbericht(key, tekst):
   """ Tweeten van 1 bericht """
