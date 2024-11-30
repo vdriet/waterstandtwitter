@@ -1,7 +1,7 @@
 """ programma om waterstanden naar Twitter te versturen """
 import os
 import tweepy
-from waterstand import haalwaterstand
+from waterstand import waterstand
 
 lijst = {
 	'KATV': {'naam': 'Katerveer', 'water': 'IJssel', 'plaats': 'Zwolle', 'twitter': 'KATV'},
@@ -54,12 +54,15 @@ def tweetbericht(key, tekst):
 
 def main():
   """ hoofdroutine """
-  for key, gegevens in lijst.items():
-    gegevens = haalwaterstand(gegevens.get('naam'), key)
-    weergavetijd = gegevens['tijd']
-    hoogtenu = gegevens['nu']
-    hoogtemorgen = gegevens['morgen']
-    twitterwaterstand(key, weergavetijd, hoogtenu, hoogtemorgen)
+  for key, locaties in lijst.items():
+    gegevens = waterstand.haalwaterstand(locaties.get('naam'), key)
+    if isinstance(gegevens, str):
+      tweetbericht(key, gegevens)
+    else:
+      weergavetijd = gegevens['tijd']
+      hoogtenu = gegevens['nu']
+      hoogtemorgen = gegevens['morgen']
+      twitterwaterstand(key, weergavetijd, hoogtenu, hoogtemorgen)
 
 if __name__ == "__main__":
   main()
