@@ -22,7 +22,7 @@ en nog een eerder bij Zutphen toegevoegd. Hieronder staan de stappen voor het co
 * Maak een Twitter-account en koppel deze aan de e-mail. Hierbij heb ik gekozen voor `waterstand<LOC_ID>`
 * Genereer api keys op https://apps.twitter.com/
 * Plaats de keys in een script setenvvars.sh die een directory hoger staat dan de repository.
-* Voeg een regel toe aan `__main__.py`
+* Voeg een regel toe aan `waterstandtwitter.py`
 
 De sourcecode spreekt hopelijk voor zich. Met het build-script kan er een docker image gemaakt worden.  
 Via de cron-job wordt deze elke 8 uur uitgevoerd.
