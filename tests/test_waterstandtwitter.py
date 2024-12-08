@@ -6,7 +6,7 @@ import waterstandtwitter
 
 class TestWaterstandTwitter(unittest.TestCase):
 
-  @patch('waterstand.waterstand.haalwaterstand')
+  @patch('waterstand.haalwaterstand')
   @patch('waterstandtwitter.tweetbericht')
   @patch('waterstandtwitter.twitterwaterstand')
   def test_main_nodata(self, mock_twitterwaterstand, mock_tweetbericht, mock_haalwaterstand):
@@ -20,7 +20,7 @@ class TestWaterstandTwitter(unittest.TestCase):
     assert mock_tweetbericht.called
     assert mock_twitterwaterstand.called == False
 
-  @patch('waterstand.waterstand.haalwaterstand')
+  @patch('waterstand.haalwaterstand')
   @patch('waterstandtwitter.tweetbericht')
   @patch('waterstandtwitter.twitterwaterstand')
   def test_main_data(self, mock_twitterwaterstand, mock_tweetbericht, mock_haalwaterstand):

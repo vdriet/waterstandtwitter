@@ -1,7 +1,7 @@
 """ programma om waterstanden naar Twitter te versturen """
 import os
 import tweepy
-from waterstand import waterstand
+import waterstand
 
 lijst = {
 	'KATV': {'naam': 'Katerveer', 'water': 'IJssel', 'plaats': 'Zwolle', 'twitter': 'KATV'},
