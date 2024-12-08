@@ -1,1 +1,1 @@
-. ./bin/activate
+. ./waterstandtwitter_venv/bin/activate
