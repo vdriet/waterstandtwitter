@@ -4,10 +4,11 @@ import tweepy
 import waterstand
 
 lijst = {
-	'KATV': {'naam': 'Katerveer', 'water': 'IJssel', 'plaats': 'Zwolle', 'twitter': 'KATV'},
-	'WIJH': {'naam': 'Wijhe', 'water': 'IJssel', 'twitter': 'WIJHE'},
-	'ZUTP': {'naam': 'Zutphen-Noord', 'water': 'IJssel', 'twitter': 'ZUTP'},
-	}
+  'KATV': {'naam': 'Katerveer', 'water': 'IJssel', 'plaats': 'Zwolle', 'twitter': 'KATV'},
+  'WIJH': {'naam': 'Wijhe', 'water': 'IJssel', 'twitter': 'WIJHE'},
+  'ZUTP': {'naam': 'Zutphen-Noord', 'water': 'IJssel', 'twitter': 'ZUTP'},
+}
+
 
 def twitterwaterstand(key, weergavetijd, hoogtenu, hoogtemorgen):
   """ versturen van de waterstand naar Twitter """
@@ -38,6 +39,7 @@ def twitterwaterstand(key, weergavetijd, hoogtenu, hoogtemorgen):
     tweetbericht(gegevens.get('twitter'), bericht)
     print(f'Succesvol tweet geplaatst voor {key} met gegevens van {datum} {tijd}')
 
+
 def tweetbericht(key, tekst):
   """ Tweeten van 1 bericht """
   envappkey = os.environ.get(f'TWITTER_{key}_APP_KEY')
@@ -45,24 +47,26 @@ def tweetbericht(key, tekst):
   envaccesstoken = os.environ.get(f'TWITTER_{key}_ACCESS_TOKEN')
   envaccesstokensecret = os.environ.get(f'TWITTER_{key}_ACCESS_TOKEN_SECRET')
   envbearertoken = os.environ.get(f'TWITTER_{key}_BEARER_TOKEN')
-  client = tweepy.Client(bearer_token = envbearertoken,
-                         consumer_key = envappkey,
-                         consumer_secret = envappsecret,
-                         access_token = envaccesstoken,
-                         access_token_secret = envaccesstokensecret)
+  client = tweepy.Client(bearer_token=envbearertoken,
+                         consumer_key=envappkey,
+                         consumer_secret=envappsecret,
+                         access_token=envaccesstoken,
+                         access_token_secret=envaccesstokensecret)
   client.create_tweet(text=tekst)
+
 
 def main():
   """ hoofdroutine """
   for key, locaties in lijst.items():
     gegevens = waterstand.haalwaterstand(locaties.get('naam'), key)
-    if isinstance(gegevens, str):
+    if gegevens['resultaat'] == 'NOK':
       tweetbericht(key, gegevens)
     else:
       weergavetijd = gegevens['tijd']
       hoogtenu = gegevens['nu']
       hoogtemorgen = gegevens['morgen']
       twitterwaterstand(key, weergavetijd, hoogtenu, hoogtemorgen)
+
 
 if __name__ == "__main__":
   main()
