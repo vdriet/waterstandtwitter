@@ -16,4 +16,4 @@ six==1.17.0
 standard-imghdr==3.13.0
 tweepy==4.14.0
 urllib3==2.2.3
-waterstand==1.1.0
+waterstand==1.1.1

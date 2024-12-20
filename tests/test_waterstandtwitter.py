@@ -12,7 +12,7 @@ class TestWaterstandTwitter(unittest.TestCase):
   def test_main_nodata(self, mock_twitterwaterstand, mock_tweetbericht, mock_haalwaterstand):
     mock_twitterwaterstand.return_value = ''
     mock_tweetbericht.return_value = ''
-    mock_haalwaterstand.return_value = {'resultaat': 'NOK'}
+    mock_haalwaterstand.return_value = {'resultaat': 'NOK', 'tekst': 'Foutmelding'}
 
     waterstandtwitter.main()
 

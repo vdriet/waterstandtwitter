@@ -60,7 +60,7 @@ def main():
   for key, locaties in lijst.items():
     gegevens = waterstand.haalwaterstand(locaties.get('naam'), key)
     if gegevens['resultaat'] == 'NOK':
-      tweetbericht(key, gegevens)
+      tweetbericht(key, gegevens['tekst'])
     else:
       weergavetijd = gegevens['tijd']
       hoogtenu = gegevens['nu']
