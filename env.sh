@@ -1,1 +1,1 @@
-. ./waterstandtwitter_venv/bin/activate
+. `find . -name "activate"`
