@@ -1,5 +1,6 @@
 """ programma om waterstanden naar Twitter te versturen """
 import os
+
 import tweepy
 import waterstand
 
@@ -10,7 +11,7 @@ lijst = {
 }
 
 
-def twitterwaterstand(key, weergavetijd, hoogtenu, hoogtemorgen):
+def twitterwaterstand(key: str, weergavetijd: str, hoogtenu: int, hoogtemorgen: int) -> None:
   """ versturen van de waterstand naar Twitter """
   datum, tijd = weergavetijd.split()
   gegevens = lijst.get(key, {})
@@ -36,17 +37,17 @@ def twitterwaterstand(key, weergavetijd, hoogtenu, hoogtemorgen):
     else:
       hoogtemorgen = hoogtemorgen * -1
       bericht = bericht + f', verwachting voor morgen is {hoogtemorgen} cm onder NAP'
-    tweetbericht(gegevens.get('twitter'), bericht)
+    tweetbericht(gegevens.get('twitter', ''), bericht)
     print(f'Succesvol tweet geplaatst voor {key} met gegevens van {datum} {tijd}')
 
 
-def tweetbericht(key, tekst):
+def tweetbericht(key: str, tekst: str) -> None:
   """ Tweeten van 1 bericht """
-  envappkey = os.environ.get(f'TWITTER_{key}_APP_KEY')
-  envappsecret = os.environ.get(f'TWITTER_{key}_APP_SECRET')
-  envaccesstoken = os.environ.get(f'TWITTER_{key}_ACCESS_TOKEN')
-  envaccesstokensecret = os.environ.get(f'TWITTER_{key}_ACCESS_TOKEN_SECRET')
-  envbearertoken = os.environ.get(f'TWITTER_{key}_BEARER_TOKEN')
+  envappkey: str = os.environ.get(f'TWITTER_{key}_APP_KEY', '')
+  envappsecret: str = os.environ.get(f'TWITTER_{key}_APP_SECRET', '')
+  envaccesstoken: str = os.environ.get(f'TWITTER_{key}_ACCESS_TOKEN', '')
+  envaccesstokensecret: str = os.environ.get(f'TWITTER_{key}_ACCESS_TOKEN_SECRET', '')
+  envbearertoken: str = os.environ.get(f'TWITTER_{key}_BEARER_TOKEN', '')
   client = tweepy.Client(bearer_token=envbearertoken,
                          consumer_key=envappkey,
                          consumer_secret=envappsecret,
@@ -55,16 +56,18 @@ def tweetbericht(key, tekst):
   client.create_tweet(text=tekst)
 
 
-def main():
+def main() -> None:
   """ hoofdroutine """
+  key: str
+  locaties: dict[str, str]
   for key, locaties in lijst.items():
-    gegevens = waterstand.haalwaterstand(locaties.get('naam'), key)
+    gegevens: dict = waterstand.haalwaterstand(locaties.get('naam', ''), key)
     if gegevens['resultaat'] == 'NOK':
       tweetbericht(key, gegevens['tekst'])
     else:
-      weergavetijd = gegevens['tijd']
-      hoogtenu = gegevens['nu']
-      hoogtemorgen = gegevens['morgen']
+      weergavetijd: str = gegevens['tijd']
+      hoogtenu: int = gegevens['nu']
+      hoogtemorgen: int = gegevens['morgen']
       twitterwaterstand(key, weergavetijd, hoogtenu, hoogtemorgen)
 
 
