@@ -6,4 +6,4 @@ mypy waterstandtwitter.py
 pylint *.py
 coverage run -m pytest
 coverage report -m
-docker build --tag waterstandtwitter .
+uname -n | grep -v penguin && docker build --tag waterstandtwitter .

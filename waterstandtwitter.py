@@ -12,7 +12,17 @@ lijst = {
 
 
 def twitterwaterstand(key: str, weergavetijd: str, hoogtenu: int, hoogtemorgen: int) -> None:
-  """ versturen van de waterstand naar Twitter """
+  """ versturen van de waterstand naar Twitter
+:param key: naam van de locatie
+:type key:str
+:param weergavetijd: datum en tijd van de weergave
+:type weergavetijd: str
+:param hoogtenu: hoogte van de laatste meting
+:type hoogtenu: int
+:param hoogtemorgen: verwachte hoogte van morgen
+:type hoogtemorgen: int
+:rtype: None
+"""
   datum, tijd = weergavetijd.split()
   gegevens = lijst.get(key, {})
   if gegevens == {}:
@@ -42,7 +52,13 @@ def twitterwaterstand(key: str, weergavetijd: str, hoogtenu: int, hoogtemorgen: 
 
 
 def tweetbericht(key: str, tekst: str) -> None:
-  """ Tweeten van 1 bericht """
+  """ Tweeten van 1 bericht
+  :param key: naam van de locatie
+  :type key: str
+  :param tekst: bericht voor tweet
+  :type tekst: str
+  :rtype: None
+  """
   envappkey: str = os.environ.get(f'TWITTER_{key}_APP_KEY', '')
   envappsecret: str = os.environ.get(f'TWITTER_{key}_APP_SECRET', '')
   envaccesstoken: str = os.environ.get(f'TWITTER_{key}_ACCESS_TOKEN', '')
