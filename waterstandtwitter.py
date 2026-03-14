@@ -5,9 +5,19 @@ import tweepy
 import waterstand
 
 lijst = {
-  'KATV': {'naam': 'Katerveer', 'water': 'IJssel', 'plaats': 'Zwolle', 'twitter': 'KATV'},
-  'WIJH': {'naam': 'Wijhe', 'water': 'IJssel', 'twitter': 'WIJHE'},
-  'ZUTP': {'naam': 'Zutphen-Noord', 'water': 'IJssel', 'twitter': 'ZUTP'},
+  'KATV': {'naam': 'Katerveer',
+           'water': 'IJssel',
+           'plaats': 'Zwolle',
+           'twitter': 'KATV',
+           'rwskey': 'zwolle.ijssel'},
+  'WIJH': {'naam': 'Wijhe',
+           'water': 'IJssel',
+           'twitter': 'WIJHE',
+           'rwskey': 'wijhe'},
+  'ZUTP': {'naam': 'Zutphen',
+           'water': 'IJssel',
+           'twitter': 'ZUTP',
+           'rwskey': 'zutphen.ijssel'},
 }
 
 
@@ -77,7 +87,7 @@ def main() -> None:
   key: str
   locaties: dict[str, str]
   for key, locaties in lijst.items():
-    gegevens: dict = waterstand.haalwaterstand(locaties.get('naam', ''), key)
+    gegevens: dict = waterstand.haalwaterstand(locaties.get('rwskey', ''))
     if gegevens['resultaat'] == 'NOK':
       tweetbericht(key, gegevens['tekst'])
     else:
