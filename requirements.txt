@@ -3,6 +3,6 @@ mypy==1.20.0
 mypy_extensions==1.1.0
 pip==26.0.1
 pylint==4.0.5
-pytest==9.0.2
+pytest==9.0.3
 tweepy==4.16.0
 waterstand==3.0.0
